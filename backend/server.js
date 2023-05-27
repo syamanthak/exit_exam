@@ -59,16 +59,16 @@ app.post('/api/send-otp', (req, res) => {
 
       // Configure the email transport
       const transporter = nodemailer.createTransport({
-        service: 'your_email_service_provider', // e.g., 'gmail'
+        service: 'gmail', // e.g., 'gmail'
         auth: {
-          user: 'your_email_address',
-          pass: 'your_email_password'
+          user: 'syamanthakr1000@gmail.com',
+          pass: 'zxqnogoiijatuqmn'
         }
       });
 
       // Set up the email options
       const mailOptions = {
-        from: 'your_email_address',
+        from: 'syamanthakr1000@gmail.com',
         to: email,
         subject: 'OTP Verification',
         text: `Your OTP is: ${otp}`
