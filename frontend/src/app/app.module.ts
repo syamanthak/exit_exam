@@ -7,12 +7,15 @@ import { AppComponent } from './app.component';
 import { OtpFormComponent } from './otp-form/otp-form.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { OtpSubmissionComponent } from './otp-submission/otp-submission.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { OtpService } from './otp.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     OtpFormComponent,
-    OtpSubmissionComponent
+    OtpSubmissionComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +24,7 @@ import { OtpSubmissionComponent } from './otp-submission/otp-submission.componen
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [OtpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

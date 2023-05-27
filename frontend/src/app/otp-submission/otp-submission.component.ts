@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { OtpService } from '../otp.service';
 @Component({
   selector: 'app-otp-submission',
   templateUrl: './otp-submission.component.html',
   styleUrls: ['./otp-submission.component.css']
 })
 export class OtpSubmissionComponent implements OnInit{
+
+  errorMessage!: { message: string; };
   
   otpForm = new FormGroup({
     otp : new FormControl('', [Validators.required]),
@@ -16,6 +19,7 @@ export class OtpSubmissionComponent implements OnInit{
     private formBuilder: FormBuilder,
     private router: Router,
     private route : ActivatedRoute,
+    private otpService: OtpService,
   ) {}
 
   ngOnInit() {
@@ -31,12 +35,18 @@ export class OtpSubmissionComponent implements OnInit{
       return;
     }
 
+    const email = 'example@example.com'; // Replace with the actual email value
     const otp = this.otpForm.value.otp;
-    // Call your OTP verification API here, passing the OTP value
-    // You can use Angular's HttpClient module to make the HTTP request
-    // Example: this.http.post('/api/verify-otp', { otp }).subscribe(...);
 
-    // Navigate to a different page after successful OTP verification
-    this.router.navigate(['success'], { relativeTo: this.route });
+    this.otpService.verifyOtp(email, otp).subscribe(
+      (response: any) => {
+        // OTP matched, redirect to the welcome page
+        this.router.navigate(['welcome']);
+      },
+      (error) => {
+        // Invalid OTP, display error message
+        this.errorMessage = error.error;
+      }
+    );
   }
 }

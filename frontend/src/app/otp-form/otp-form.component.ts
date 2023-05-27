@@ -10,6 +10,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class OtpFormComponent implements OnInit {
 
+  errorMessage!: { message: string; };
+
   otpForm = new FormGroup({
     email : new FormControl('', [Validators.email, Validators.required]),
   })
@@ -34,10 +36,12 @@ export class OtpFormComponent implements OnInit {
       (response: any) => {
         console.log(response);
         // Handle the success response here, e.g., show a success message to the user
+        this.router.navigate(['welcome']);
       },
       (error: any) => {
         console.log(error);
         // Handle the error response here, e.g., show an error message to the user
+        this.errorMessage = error.error;
       }
     );
   }
