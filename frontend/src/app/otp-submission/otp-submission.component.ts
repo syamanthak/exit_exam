@@ -34,10 +34,10 @@ export class OtpSubmissionComponent implements OnInit{
     if (this.otpForm.invalid) {
       return;
     }
-
+  
     const email = 'example@example.com'; // Replace with the actual email value
-    const otp = this.otpForm.value.otp;
-
+    const otp = Number(this.otpForm.value.otp);
+  
     this.otpService.verifyOtp(email, otp).subscribe(
       (response: any) => {
         // OTP matched, redirect to the welcome page
